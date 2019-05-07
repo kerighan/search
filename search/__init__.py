@@ -50,7 +50,8 @@ class Search(object):
         pool = Pool(self.workers)
         for result in tqdm(
                 pool.imap_unordered(compute_process, params),
-                total=len(params)):
+                total=len(params),
+                desc="Grid search"):
             data.append(result)
         return data
     
