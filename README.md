@@ -11,6 +11,7 @@ This a simple Python class that allows to concurrently minimize or maximize arbi
 ## Dependencies
 
 * numpy
+* tqdm
 
 ## Tutorial
 

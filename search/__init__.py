@@ -1,5 +1,6 @@
 from multiprocessing import Pool
 from queue import Queue
+from tqdm import tqdm
 import numpy as np
 
 
@@ -45,8 +46,12 @@ class Search(object):
         for i in range(self.dim):
             params.append([func, self.get_parameters(i)])
 
-        with Pool(self.workers) as p:
-            data = p.map(compute_process, params)
+        data = []
+        pool = Pool(self.workers)
+        for result in tqdm(
+                pool.imap_unordered(compute_process, params),
+                total=len(params)):
+            data.append(result)
         return data
     
     def minimize(self, func):
